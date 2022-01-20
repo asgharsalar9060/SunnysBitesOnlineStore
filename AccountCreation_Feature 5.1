@@ -1,0 +1,61 @@
+Scenario: Account creation on DogDollars for existing vendors
+
+Given vendor is on Sign Up page
+When vender enters name
+And vendor enters personal phone number
+And vendor enters email
+And vendor clicks on Next button
+And vendor enters address
+And vendor enters public phone number
+And vendor chooses operation hours
+And vendor enters DogDollars existing account number 
+And vendor clicks on Create Account button
+Then vendor gets 'Your account has been successfully created.' message
+
+Note: I assume the new vendors should first create an account on Online Store to get an account number for DogDollars so the following scentario is for the new vendors.
+
+Scenario Outline: Account creation on Sunny's Bites Online Store
+
+Given vendor is on Sign Up page
+When vendor enter "<username>"
+And vendor enters "<password>"
+And vendor enters "<email>"
+And vendor clicks on Create Account button
+Then vendor receives a confirmation "<message>"
+
+Examples:
+	| username  | password | email address		| message							 		  |
+	| F.Scott	| Sn@123   | scott123@gmail.com | Your account has been successfully created. |
+
+Scenario: Account creation on DogDollars for new vendors
+
+Given vendor is on Sign Up page
+When vender enters first name
+And vendor enters last name
+And vendor enters personal phone number
+And vendor enters email
+And vendor clicks on Next button
+And vendor enters address
+And vendor enters public phone number
+And vendor chooses operation hours 
+And vendor clicks on Create Account button
+Then vendor gets 'Your account is pending for confirmation.' message
+
+Scenario Outline: Place order with pending account 
+
+Given user is on DogDollars page
+And 'Your account has been pending for approval.' message is displayed
+When user returns to Online Store
+And user clicks on an item Purchase button
+And user enters "<name>" and "<phone number>" and "<email address>"
+And user enters "<bank acount number>" and "<expiration date>" and "<security code>"
+And user enters "<shipping address>"
+And user clicks on Purchase button
+Then 'You cannot make a purchase due to your pending account.' message is displayed
+And user gets redirected to account details page 
+
+Examples:
+
+| name 	| phone number	|	email address	| bank account number |	expiration date	| security code	| shipping address |
+| David	| (000) 000-0000| david123@gmail.com| 0000 0000 0000 0000 | 00/00/0000		| 000			|  address	       |
+

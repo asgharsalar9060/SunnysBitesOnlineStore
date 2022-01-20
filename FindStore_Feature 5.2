@@ -1,0 +1,8 @@
+Scenario: Search online stores on Sunnys Bites online store
+
+Given user is on find venders page
+When user writes 'MonkeyMoon' in search box
+And user clicks on search button
+And MonkeyMoon store pops up
+And user clicks on MonkeyMoon link
+Then MonkeyMoon home page opens in a new tab
